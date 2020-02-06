@@ -1,3 +1,3 @@
 # ImageToGBA.js
 
-Falta probar a compilarlo
+Upload the image and automatically download the header file.
