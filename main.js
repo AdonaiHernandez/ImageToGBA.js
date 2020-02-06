@@ -1,7 +1,8 @@
 canvas = document.querySelector("canvas");
 ctx = canvas.getContext("2d");
 input = document.querySelector("input");
-p = document.querySelector("p");
+p = document.querySelector("#paleta");
+pImagen = document.querySelector("#imagen");
 img = new Image();
 pixels = [];
 palete = [];
@@ -109,5 +110,13 @@ function parseImagenData(){
     }
 
     console.log(finalData);
+
+    showImagenData();
+
+}
+
+function showImagenData(){
+
+    pImagen.innerText = finalData.join("\n");
 
 }
