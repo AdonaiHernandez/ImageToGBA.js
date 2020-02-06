@@ -9,6 +9,7 @@ palete = [];
 objectPalete = {};
 gbaImagenData = [];
 finalData = [];
+imagenDataRaw = [];
 
 function loadImage(e){
 
@@ -38,6 +39,7 @@ function getPixelsColors(){
         const rgb15 = (data[i] >> 3) | ((data[i+1] >> 3) << 5) | ((data[i+2] >> 3) << 10);
 
         pixels.push(rgb15);
+        imagenDataRaw.push(toHexValue(rgb15.toString(16), 4));
 
         if (palete.indexOf(rgb15) === -1){
             
@@ -134,7 +136,7 @@ function createFile(){
     texto += "\n";
     texto += "const u16 imageData[] = {\n";
 
-    texto += finalData.join(", ");
+    texto += imagenDataRaw.join(", ");
 
     texto += "};\n";
     texto += "\n";
@@ -144,6 +146,14 @@ function createFile(){
     texto += Object.values(objectPalete).join(", ");
 
     texto += "};\n";
+
+    // texto += "\n";
+    // texto += "const u16 imageData[] = {\n";
+
+    // texto += finalData.join(", ");
+
+    // texto += "};\n";
+    // texto += "\n";
 
     download("imagen.h", texto);
 
