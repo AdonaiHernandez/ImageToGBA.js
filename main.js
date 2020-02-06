@@ -119,4 +119,45 @@ function showImagenData(){
 
     pImagen.innerText = finalData.join("\n");
 
+    createFile();
 }
+
+function createFile(){
+
+    let texto = "";
+
+    //#define  pic_WIDTH   240
+    //#define  pic_HEIGHT  160
+
+    texto += "#define image_WIDTH " + img.width + "\n";
+    texto += "#define image_HEIGHT " + img.height + "\n";
+    texto += "\n";
+    texto += "const u16 imageData[] = {\n";
+
+    texto += finalData.join(", ");
+
+    texto += "};\n";
+    texto += "\n";
+
+    texto += "const u16 imagePalete[] = {\n";
+
+    texto += Object.values(objectPalete).join(", ");
+
+    texto += "};\n";
+
+    download("imagen.h", texto);
+
+}
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
